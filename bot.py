@@ -1,4 +1,4 @@
-import random
+ import random
 import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
@@ -78,14 +78,14 @@ async def dev(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(random.choice(RESPONSES["dev"]))
 
 async def brainscan(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        random.choice([
-            "🧠 Attention span: 1.8 sec",
-            "☣ Meme exposure: CRITICAL",
-            "💀 Brain cells remaining: 12",
-            "📉 Portfolio sanity: LOST"
-        ])
-    )
+    scans = [
+        "🧠 Attention span: 1.8 sec",
+        "☣ Meme exposure: CRITICAL",
+        "💀 Brain cells remaining: 12",
+        "📉 Portfolio sanity: LOST",
+        "🫠 Terminally online diagnosis confirmed"
+    ]
+    await update.message.reply_text(random.choice(scans))
 
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -122,6 +122,7 @@ def main():
     app.add_handler(CommandHandler("raid", raid))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chatter))
 
+    print("ROT BOT ONLINE ☣")
     app.run_polling()
 
 if __name__ == "__main__":
