@@ -1,18 +1,18 @@
- import random
+import random
 import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
 
 logging.basicConfig(level=logging.INFO)
 
-BOT_TOKEN = "8777562082:AAG5jy86KzHsF09kdPyqlrpdKYJtxMHW49A"
+BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
 
 WEBSITE = "https://joinrot.xyz"
 BUY_LINK = "https://joinrot.xyz"
 ANNOUNCEMENTS = "https://t.me/rotterminal"
 CONTRACT = "6cod81CaFnZs91KUL6vYgsbZfLzHdYmfUMBXbtLwCX8Z"
 
-START_IMAGE = "https://raw.githubusercontent.com/rotprotocolcoin-cyber/joinrot/main/rot-start.png"
+START_IMAGE = "https://raw.githubusercontent.com/rotprotocolcoin-cyber/joinrot/main/ChatGPT%20Image%20May%2012%2C%202026%2C%2003_06_23%20AM.png"
 
 RESPONSES = {
     "dev": [
@@ -46,10 +46,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_photo(
         photo=START_IMAGE,
         caption=(
-            "⚠ OFFICIAL $ROT TERMINAL\n\n"
-            "MEMETIC EXPOSURE: CRITICAL\n"
-            "Access official network channels below.\n\n"
-            "SYSTEM STATUS: ONLINE ☣"
+            "☣ OFFICIAL $ROT TERMINAL ☣\n\n"
+            "WELCOME TO THE ROT.\n"
+            "MEMETIC EXPOSURE: CRITICAL.\n"
+            "BRAIN CELL LOSS: IRREVERSIBLE.\n\n"
+            "SYSTEM STATUS: ONLINE"
         ),
         reply_markup=reply_markup
     )
