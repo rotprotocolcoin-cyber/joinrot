@@ -1,7 +1,7 @@
 import random
 import logging
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, MessageHandler, filters
+from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
 
 logging.basicConfig(level=logging.INFO)
 
@@ -12,26 +12,45 @@ BUY_LINK = "https://joinrot.xyz"
 ANNOUNCEMENTS = "https://t.me/rotterminal"
 CONTRACT = "6cod81CaFnZs91KUL6vYgsbZfLzHdYmfUMBXbtLwCX8Z"
 
+START_IMAGE = "https://raw.githubusercontent.com/rotprotocolcoin-cyber/joinrot/main/rot-start.png"
+
 RESPONSES = {
-    "dev": ["⚠ DEV STATUS: CLASSIFIED."],
-    "scam": ["SCAM ANALYSIS COMPLETE: vibes unstable, systems operational."],
-    "wen": ["TIME IS A SOCIAL CONSTRUCT. INFECTION CONTINUES."],
-    "brainrot": ["COGNITIVE DECAY DETECTED. NO CURE."]
+    "dev": [
+        "⚠ DEV STATUS: CLASSIFIED.",
+        "TRANSMISSION ENCRYPTED.",
+        "ACCESS DENIED."
+    ],
+    "scam": [
+        "SCAM ANALYSIS COMPLETE: vibes unstable.",
+        "UNTRUSTED SIGNAL DETECTED."
+    ],
+    "wen": [
+        "TIME IS A SOCIAL CONSTRUCT.",
+        "INFECTION CONTINUES."
+    ],
+    "brainrot": [
+        "COGNITIVE DECAY DETECTED.",
+        "NO CURE FOUND."
+    ]
 }
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
         [InlineKeyboardButton("🌐 WEBSITE", url=WEBSITE)],
         [InlineKeyboardButton("💸 BUY $ROT", url=BUY_LINK)],
-        [InlineKeyboardButton("📢 ANNOUNCEMENTS", url=ANNOUNCEMENTS)]
+        [InlineKeyboardButton("📢 ANNOUNCEMENTS", url=ANNOUNCEMENTS)],
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    await update.message.reply_text(
-        "⚠ OFFICIAL $ROT TERMINAL\n\n"
-        "Access official links, contract intelligence, and system protocols.\n\n"
-        "SYSTEM STATUS: OPERATIONAL ☣",
+    await update.message.reply_photo(
+        photo=START_IMAGE,
+        caption=(
+            "⚠ OFFICIAL $ROT TERMINAL\n\n"
+            "MEMETIC EXPOSURE: CRITICAL\n"
+            "Access official network channels below.\n\n"
+            "SYSTEM STATUS: ONLINE ☣"
+        ),
         reply_markup=reply_markup
     )
 
@@ -56,22 +75,27 @@ async def website(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(WEBSITE)
 
 async def dev(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("DEV STATUS: CLASSIFIED.")
+    await update.message.reply_text(random.choice(RESPONSES["dev"]))
 
 async def brainscan(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         random.choice([
-            "Attention span: 2.3 sec",
-            "Meme exposure: CRITICAL",
-            "Brain cells remaining: 14"
+            "🧠 Attention span: 1.8 sec",
+            "☣ Meme exposure: CRITICAL",
+            "💀 Brain cells remaining: 12",
+            "📉 Portfolio sanity: LOST"
         ])
     )
 
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("☣ SYSTEM STATUS: OPERATIONAL")
+    await update.message.reply_text(
+        "☣ SYSTEM STATUS: OPERATIONAL\n"
+        "NETWORK: STABLE\n"
+        "MEMETIC LOAD: CRITICAL"
+    )
 
 async def raid(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("RAID PROTOCOL ENABLED.")
+    await update.message.reply_text("🚨 RAID PROTOCOL ENABLED.")
 
 async def chatter(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not update.message or not update.message.text:
