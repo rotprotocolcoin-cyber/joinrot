@@ -5,7 +5,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, ContextTyp
 
 logging.basicConfig(level=logging.INFO)
 
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
+BOT_TOKEN = "8777562082:AAHT3clhV7BexKiDpJKEYYbqpjolczPODzg"
 
 WEBSITE = "https://joinrot.xyz"
 BUY_LINK = "https://joinrot.xyz"
@@ -15,23 +15,10 @@ CONTRACT = "6cod81CaFnZs91KUL6vYgsbZfLzHdYmfUMBXbtLwCX8Z"
 START_IMAGE = "https://raw.githubusercontent.com/rotprotocolcoin-cyber/joinrot/main/ChatGPT%20Image%20May%2012%2C%202026%2C%2003_06_23%20AM.png"
 
 RESPONSES = {
-    "dev": [
-        "⚠ DEV STATUS: CLASSIFIED.",
-        "TRANSMISSION ENCRYPTED.",
-        "ACCESS DENIED."
-    ],
-    "scam": [
-        "SCAM ANALYSIS COMPLETE: vibes unstable.",
-        "UNTRUSTED SIGNAL DETECTED."
-    ],
-    "wen": [
-        "TIME IS A SOCIAL CONSTRUCT.",
-        "INFECTION CONTINUES."
-    ],
-    "brainrot": [
-        "COGNITIVE DECAY DETECTED.",
-        "NO CURE FOUND."
-    ]
+    "dev": ["⚠ DEV STATUS: CLASSIFIED.", "TRANSMISSION ENCRYPTED.", "ACCESS DENIED."],
+    "scam": ["SCAM ANALYSIS COMPLETE: vibes unstable.", "UNTRUSTED SIGNAL DETECTED."],
+    "wen": ["TIME IS A SOCIAL CONSTRUCT.", "INFECTION CONTINUES."],
+    "brainrot": ["COGNITIVE DECAY DETECTED.", "NO CURE FOUND."]
 }
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -56,15 +43,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "/contract\n"
-        "/buy\n"
-        "/website\n"
-        "/dev\n"
-        "/brainscan\n"
-        "/status\n"
-        "/raid"
-    )
+    await update.message.reply_text("/contract\n/buy\n/website\n/dev\n/brainscan\n/status\n/raid")
 
 async def contract(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"CA:\n{CONTRACT}")
@@ -89,11 +68,7 @@ async def brainscan(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(random.choice(scans))
 
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "☣ SYSTEM STATUS: OPERATIONAL\n"
-        "NETWORK: STABLE\n"
-        "MEMETIC LOAD: CRITICAL"
-    )
+    await update.message.reply_text("☣ SYSTEM STATUS: OPERATIONAL\nNETWORK: STABLE\nMEMETIC LOAD: CRITICAL")
 
 async def raid(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("🚨 RAID PROTOCOL ENABLED.")
