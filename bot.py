@@ -1,4 +1,3 @@
-import os
 import random
 import logging
 from telegram import Update
@@ -6,16 +5,18 @@ from telegram.ext import Application, CommandHandler, MessageHandler, ContextTyp
 
 logging.basicConfig(level=logging.INFO)
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-WEBSITE = os.getenv("WEBSITE", "https://joinrot.xyz")
-BUY_LINK = os.getenv("BUY_LINK", WEBSITE)
-CONTRACT = os.getenv("CONTRACT", "6cod81CaFnZs91KUL6VgysbZfLzHdYmfUMBXbtLwCX8Z")
+BOT_TOKEN = "8777562082:AAG5jy86KzHsF09kdPyqlrpdKYJtxMHW49A"
+WEBSITE = "https://joinrot.xyz"
+BUY_LINK = "https://joinrot.xyz"
+CONTRACT = "6cod81CaFnZs91KUL6vYgsbZfLzHdYmfUMBXbtLwCX8Z"
 
 RESPONSES = {
     "dev": ["⚠ DEV STATUS: CLASSIFIED."],
     "scam": ["SCAM ANALYSIS COMPLETE: vibes unstable, systems operational."],
     "wen": ["TIME IS A SOCIAL CONSTRUCT. INFECTION CONTINUES."],
-    "brainrot": ["COGNITIVE DECAY DETECTED. NO CURE."]
+    "brainrot": ["COGNITIVE DECAY DETECTED. NO CURE."],
+    "buy": [f"BUY $ROT:\n{BUY_LINK}"],
+    "contract": [f"CA:\n{CONTRACT}"]
 }
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -76,9 +77,6 @@ async def chatter(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
 
 def main():
-    if not BOT_TOKEN:
-        raise ValueError("BOT_TOKEN missing")
-
     app = Application.builder().token(BOT_TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))
