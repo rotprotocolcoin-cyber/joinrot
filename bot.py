@@ -10,26 +10,12 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 WEBSITE = os.getenv("WEBSITE", "https://joinrot.xyz")
 BUY_LINK = os.getenv("BUY_LINK", WEBSITE)
 CONTRACT = os.getenv("CONTRACT", "6cod81CaFnZs91KUL6VgysbZfLzHdYmfUMBXbtLwCX8Z")
-GROUP = os.getenv("TELEGRAM_GROUP", "@jointherot")
-
-ADMIN_IDS = {
-    int(x) for x in os.getenv("ADMIN_IDS", "").split(",")
-    if x.strip().isdigit()
-}
 
 RESPONSES = {
-    "dev": [
-        "⚠ DEV STATUS: CLASSIFIED."
-    ],
-    "scam": [
-        "SCAM ANALYSIS COMPLETE: vibes unstable, systems operational."
-    ],
-    "wen": [
-        "TIME IS A SOCIAL CONSTRUCT. INFECTION CONTINUES."
-    ],
-    "brainrot": [
-        "COGNITIVE DECAY DETECTED. NO CURE."
-    ]
+    "dev": ["⚠ DEV STATUS: CLASSIFIED."],
+    "scam": ["SCAM ANALYSIS COMPLETE: vibes unstable, systems operational."],
+    "wen": ["TIME IS A SOCIAL CONSTRUCT. INFECTION CONTINUES."],
+    "brainrot": ["COGNITIVE DECAY DETECTED. NO CURE."]
 }
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -75,10 +61,7 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def raid(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "⚠ RAID PROTOCOL ENABLED\n"
-        "Deploy memes.\n"
-        "Spread infection.\n"
-        "Engage X."
+        "⚠ RAID PROTOCOL ENABLED\nDeploy memes.\nSpread infection.\nEngage X."
     )
 
 async def chatter(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -91,25 +74,6 @@ async def chatter(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if key in text and random.random() < 0.65:
             await update.message.reply_text(random.choice(replies))
             return
-
-async def auto_alert(context: ContextTypes.DEFAULT_TYPE):
-    if not GROUP:
-        return
-
-    alerts = [
-        "⚠ SYSTEM BREACH DETECTED",
-        "☣ MEMETIC INFECTION ACTIVE",
-        "BRAIN CELLS DECLINING",
-        "NO UTILITY. NO ROADMAP. NO CURE."
-    ]
-
-    try:
-        await context.bot.send_message(
-            chat_id=GROUP,
-            text=random.choice(alerts)
-        )
-    except Exception as e:
-        logging.error(f"Auto alert failed: {e}")
 
 def main():
     if not BOT_TOKEN:
@@ -126,16 +90,7 @@ def main():
     app.add_handler(CommandHandler("brainscan", brainscan))
     app.add_handler(CommandHandler("status", status))
     app.add_handler(CommandHandler("raid", raid))
-
-    app.add_handler(
-        MessageHandler(filters.TEXT & ~filters.COMMAND, chatter)
-    )
-
-    app.job_queue.run_repeating(
-        auto_alert,
-        interval=10800,
-        first=600
-    )
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chatter))
 
     print("ROT SYSTEM ONLINE ☣️")
     app.run_polling()
