@@ -1,69 +1,77 @@
 import random
 import logging
-from telegram import Update
-from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, MessageHandler, filters
 
 logging.basicConfig(level=logging.INFO)
 
 BOT_TOKEN = "8777562082:AAG5jy86KzHsF09kdPyqlrpdKYJtxMHW49A"
+
 WEBSITE = "https://joinrot.xyz"
 BUY_LINK = "https://joinrot.xyz"
+ANNOUNCEMENTS = "https://t.me/rotterminal"
 CONTRACT = "6cod81CaFnZs91KUL6vYgsbZfLzHdYmfUMBXbtLwCX8Z"
 
 RESPONSES = {
     "dev": ["⚠ DEV STATUS: CLASSIFIED."],
     "scam": ["SCAM ANALYSIS COMPLETE: vibes unstable, systems operational."],
     "wen": ["TIME IS A SOCIAL CONSTRUCT. INFECTION CONTINUES."],
-    "brainrot": ["COGNITIVE DECAY DETECTED. NO CURE."],
-    "buy": [f"BUY $ROT:\n{BUY_LINK}"],
-    "contract": [f"CA:\n{CONTRACT}"]
+    "brainrot": ["COGNITIVE DECAY DETECTED. NO CURE."]
 }
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    keyboard = [
+        [InlineKeyboardButton("🌐 WEBSITE", url=WEBSITE)],
+        [InlineKeyboardButton("💸 BUY $ROT", url=BUY_LINK)],
+        [InlineKeyboardButton("📢 ANNOUNCEMENTS", url=ANNOUNCEMENTS)]
+    ]
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
     await update.message.reply_text(
-        "⚠️ $ROT SYSTEM ONLINE\n\n"
-        "Welcome to the official terminal.\n"
-        "Type /help to access protocols."
+        "⚠ OFFICIAL $ROT TERMINAL\n\n"
+        "Access official links, contract intelligence, and system protocols.\n\n"
+        "SYSTEM STATUS: OPERATIONAL ☣",
+        reply_markup=reply_markup
     )
 
 async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "/contract - contract address\n"
-        "/buy - buy link\n"
-        "/website - website\n"
-        "/dev - dev status\n"
-        "/brainscan - scan user\n"
-        "/status - system health\n"
-        "/raid - raid protocol"
+        "/contract\n"
+        "/buy\n"
+        "/website\n"
+        "/dev\n"
+        "/brainscan\n"
+        "/status\n"
+        "/raid"
     )
 
 async def contract(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"CA:\n{CONTRACT}")
 
 async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(f"BUY $ROT:\n{BUY_LINK}")
+    await update.message.reply_text(BUY_LINK)
 
 async def website(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(f"PORTAL:\n{WEBSITE}")
+    await update.message.reply_text(WEBSITE)
 
 async def dev(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("DEV STATUS: CLASSIFIED.")
 
 async def brainscan(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    results = [
-        "Attention span: 2.3 sec\nDiagnosis: terminally online.",
-        "Brain cells remaining: 14\nPrognosis: unstable.",
-        "Meme exposure: CRITICAL\nCognitive decay accelerating."
-    ]
-    await update.message.reply_text(random.choice(results))
+    await update.message.reply_text(
+        random.choice([
+            "Attention span: 2.3 sec",
+            "Meme exposure: CRITICAL",
+            "Brain cells remaining: 14"
+        ])
+    )
 
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("☣️ SYSTEM STATUS: OPERATIONAL")
+    await update.message.reply_text("☣ SYSTEM STATUS: OPERATIONAL")
 
 async def raid(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "⚠ RAID PROTOCOL ENABLED\nDeploy memes.\nSpread infection.\nEngage X."
-    )
+    await update.message.reply_text("RAID PROTOCOL ENABLED.")
 
 async def chatter(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not update.message or not update.message.text:
@@ -90,7 +98,6 @@ def main():
     app.add_handler(CommandHandler("raid", raid))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, chatter))
 
-    print("ROT SYSTEM ONLINE ☣️")
     app.run_polling()
 
 if __name__ == "__main__":
